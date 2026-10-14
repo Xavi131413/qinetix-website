@@ -45,8 +45,11 @@ nav a.cta:hover { background: var(--indigo-dark); color: #fff; }
 
 /* Hero */
 .hero {
-  padding: 96px 0 88px;
-  background: var(--indigo-deep);
+  padding: 120px 0 112px;
+  background:
+    linear-gradient(90deg, rgba(27,35,80,0.97) 0%, rgba(27,35,80,0.92) 38%, rgba(27,35,80,0.55) 68%, rgba(27,35,80,0.20) 100%),
+    url("hero.jpg") right center / cover no-repeat,
+    var(--indigo-deep);
   color: #fff;
 }
 .eyebrow {
@@ -70,9 +73,9 @@ nav a.cta:hover { background: var(--indigo-dark); color: #fff; }
 .hero .btn.ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.6); margin-left: 12px; }
 .hero .btn.ghost:hover { background: rgba(255,255,255,0.1); }
 
-.hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
+.hero-grid { display: block; } .hero-text { max-width: 640px; }
 .hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3.4; object-fit: cover; border-radius: 4px; }
-@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; } .hero-img img { aspect-ratio: 16 / 9; } }
+@media (max-width: 900px) { .hero { background: linear-gradient(180deg, rgba(27,35,80,0.85), rgba(27,35,80,0.95)), url("hero.jpg") center / cover no-repeat, var(--indigo-deep); } }
 
 /* Sections */
 section { padding: 80px 0; }
