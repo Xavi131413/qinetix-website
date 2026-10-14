@@ -42,35 +42,20 @@
       <p class="eyebrow">Complexity &middot; Fragmentation &middot; Market noise</p>
       <h2>Why</h2>
       <p class="intro one-line">Forces at work in the global biofuels market make it harder to price, forecast and trade.</p>
-      <div class="drivers">
-        <div class="driver hero-tile">
-          <h3>Fragmented national rules</h3>
-          <p>Regulatory complexity &middot; Multiple layers</p>
+      <div class="forces-map">
+        <div class="fcol fleft">
+          <div class="driver"><h3>Fragmented national rules</h3><p>Regulatory complexity &middot; Multiple layers</p></div>
+          <div class="driver"><h3>Carbon-driven mandates</h3><p>GHG targets &middot; Carbon &amp; ticket optimisation</p></div>
+          <div class="driver"><h3>Regionalisation</h3><p>Fraud &middot; Trade barriers &middot; Domestic focus</p></div>
+          <div class="driver"><h3>Information overload</h3><p>Crowded intelligence space &middot; Fragmented data &middot; More noise than signal</p></div>
         </div>
-        <div class="driver">
-          <h3>Carbon-driven mandates</h3>
-          <p>GHG targets &middot; Carbon &amp; ticket optimisation</p>
+        <div class="hub"><span>Forces</span></div>
+        <div class="fcol fright">
+          <div class="driver"><h3>New demand sectors</h3><p>Aviation &middot; Maritime &middot; New arbitrages</p></div>
+          <div class="driver"><h3>New compliance pathways</h3><p>Electric vehicles &middot; Biomethane &middot; Evolving substitution</p></div>
+          <div class="driver"><h3>Advanced feedstock transition</h3><p>Waste fuels first &middot; Double counting phased out &middot; Crop limits</p></div>
         </div>
-        <div class="driver">
-          <h3>Regionalisation</h3>
-          <p>Fraud &middot; Trade barriers &middot; Domestic focus</p>
-        </div>
-        <div class="driver">
-          <h3>Information overload</h3>
-          <p>Crowded intelligence space &middot; Fragmented data &middot; More noise than signal</p>
-        </div>
-        <div class="driver">
-          <h3>New demand sectors</h3>
-          <p>Aviation &middot; Maritime &middot; New arbitrages</p>
-        </div>
-        <div class="driver">
-          <h3>New compliance pathways</h3>
-          <p>Electric vehicles &middot; Biomethane &middot; Evolving substitution</p>
-        </div>
-        <div class="driver">
-          <h3>Advanced feedstock transition</h3>
-          <p>Waste fuels first &middot; Double counting phased out &middot; Crop limits</p>
-        </div>
+        <svg class="farrows" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3a4ba0"/></marker></defs></svg>
       </div>
     </div>
   </section>
@@ -207,6 +192,31 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  function draw(){
+    var map=document.querySelector('.forces-map'); if(!map) return;
+    var svg=map.querySelector('.farrows'), hub=map.querySelector('.hub span');
+    svg.querySelectorAll('path.a').forEach(function(p){p.remove();});
+    if(window.innerWidth<=860) return;
+    var m=map.getBoundingClientRect(), h=hub.getBoundingClientRect();
+    var cx=h.left+h.width/2-m.left, cy=h.top+h.height/2-m.top, r=h.width/2+4;
+    svg.setAttribute('width',m.width); svg.setAttribute('height',m.height);
+    map.querySelectorAll('.driver').forEach(function(d){
+      var b=d.getBoundingClientRect(), left=d.closest('.fleft')!==null;
+      var tx=(left?b.right+6:b.left-6)-m.left, ty=b.top+b.height/2-m.top;
+      var ang=Math.atan2(ty-cy,tx-cx), sx=cx+r*Math.cos(ang), sy=cy+r*Math.sin(ang);
+      var mx=(sx+tx)/2;
+      var p=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d','M'+sx+' '+sy+' C '+mx+' '+sy+', '+mx+' '+ty+', '+tx+' '+ty);
+      p.setAttribute('class','a'); p.setAttribute('marker-end','url(#ah)');
+      svg.appendChild(p);
+    });
+  }
+  window.addEventListener('load',draw); window.addEventListener('resize',draw);
+  if(document.fonts) document.fonts.ready.then(draw);
+})();
+</script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "62e4a88decbc49faa5d9c5701a12a52c"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
